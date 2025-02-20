@@ -24,17 +24,8 @@ function Remove-Folder {
             Write-Output "Successfully deleted: $folderPath"
         }
         catch {
-            # Suppress errors for folders under windowsfilter
-            if ($folderPath -like "C:\ProgramData\docker\windowsfilter*") {
-                Write-Output "Failed to delete: $folderPath"
-            }
-            elseif ($folderPath -like "C:\ProgramData\docker*") {
-                .\clean-docker-windowsfilter-folder.ps1
-            } 
-            else {
-                Write-Output "Failed to delete: $folderPath"
-                Write-Error $_.Exception.Message
-            }
+            Write-Output "Failed to delete: $folderPath"
+            Write-Error $_.Exception.Message
         }
 
     }
